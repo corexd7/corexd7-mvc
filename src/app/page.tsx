@@ -8,7 +8,7 @@ export default function Home() {
   const [responseData, setResponseData] = useState<any>(null);
 
   const getDetails = async () => {
-    const response = await fetch(`http://localhost:3000/api/searchProduct`, {
+    const response = await fetch(`https://mr-energy-two.vercel.app/api/searchProduct`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
