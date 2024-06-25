@@ -34,7 +34,7 @@ export default function Home() {
               onChange={($) => setSearch($?.target?.value)}
               type="text"
               placeholder="Enter product key..."
-              className="w-2/3 px-2 py-2 rounded-md rounded-r-none"
+              className="w-2/3 px-2 py-2 rounded-md rounded-r-none text-black"
             />
             <button
               onClick={() => getDetails()}
