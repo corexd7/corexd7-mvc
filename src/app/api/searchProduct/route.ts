@@ -9,15 +9,15 @@ export async function POST(req: NextRequest) {
   const cursor = await client
     .db("mrenergyProduct")
     .collection("product-key")
-    .find({key:body?.id,isUsed:0}).toArray();
+    .find({key:body?.id}).toArray();
     
-
+  console.log(cursor)
   if(cursor?.length!==0){
     await client
     .db("mrenergyProduct")
     .collection("product-key")
     .updateOne({key: body?.id,isUsed:0}, {$set:{isUsed:1}})
-    return Response.json({ message: "Valid Key",status:true });
+    return Response.json({ message: "Valid Key",status:true,data:cursor[0] });
   }else{
       return Response.json({ message: "Invalid Key",status:false });
   }

@@ -8,7 +8,9 @@ export default function Home() {
   const [responseData, setResponseData] = useState<any>(null);
 
   const getDetails = async () => {
-    const response = await fetch(`https://mr-energy-two.vercel.app/api/searchProduct`, {
+    // const response = await fetch(`http://localhost:3000/api/searchProduct`, {
+      const response = await fetch(`https://mr-energy-two.vercel.app/api/searchProduct`, {
+      
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,10 +50,10 @@ export default function Home() {
         <Player
           autoplay={true}
           loop={true}
-          src={responseData?.status ?"/animations/success-1.json":"/animations/failure.json"}
+          src={responseData?.status ?(responseData?.data?.isUsed==0?"/animations/success-1.json":"/animations/warning.json"):"/animations/failure.json"}
           style={{ height: "200px", width: "200px" }}
         ></Player>
-        <p className="text-center text-lg" style={{color:responseData?.status?'green':'red'}}>{responseData?.status?'Successfully Verified':'Invalid Key'}</p>
+        <p className="text-center text-lg" style={{color:responseData?.status?(responseData?.data?.isUsed==0?'green':'yellow'):'red'}}>{responseData?.status?(responseData?.data?.isUsed==0?'Successfully Verified':'Already Registered'):'Invalid Key'}</p>
         <div className="flex justify-center w-full">
 
         <button
