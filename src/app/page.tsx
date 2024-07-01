@@ -45,7 +45,8 @@ export default function Home() {
 
   return (
     <>
-      <nav className="font-sans flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-6 bg-black shadow sm:items-baseline w-full">
+    <div className="sticky top-0">
+      <nav className="font-sans sticky flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-20 bg-black shadow sm:items-baseline w-full">
         <div
           className="mb-2 sm:mb-0 flex flex-row
   "
@@ -53,18 +54,7 @@ export default function Home() {
           <div className="h-10 w-32 self-center mr-2">
             <img className="h-10 w-32 self-center" src="/logo.png" />
           </div>
-          <div>
-            <a
-              href="/home"
-              className="text-2xl no-underline text-grey-darkest hover:text-blue-dark font-sans font-bold"
-            >
-              LogoText
-            </a>
-            <br />
-            <span className="text-xs text-grey-dark">
-              Beautiful New Tagline
-            </span>
-          </div>
+          
         </div>
 
         <div className="sm:mb-0 self-center flex">
@@ -91,6 +81,7 @@ export default function Home() {
           </p>
         </div>
       </nav>
+    </div>
       <div
         ref={home}
         className="w-full h-[90vh] flex justify-center items-center"
@@ -107,12 +98,12 @@ export default function Home() {
         className="w-full h-[90vh] flex justify-center items-center"
       >
         <Image
-          src={`/nutrition.png`}
+          src={`/nutrition1.png`}
           alt="Picture of the author"
           width="0"
           height="0"
-          sizes="70vw"
-          className="w-[70vw] h-auto"
+          sizes="50vw"
+          className="w-[50vw] h-[50vw] mt-10"
         />
       </div>
       <div
