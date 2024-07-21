@@ -27,7 +27,7 @@ export default function Home() {
   const [responseData, setResponseData] = useState<any>(null);
 
   const getDetails = async () => {
-    alert('running')
+    // alert('running')
     // const response = await fetch(`http://localhost:3000/api/searchProduct`, {
     const response = await fetch(
       `https://mrenergy.me/api/searchProduct`,
@@ -41,7 +41,7 @@ export default function Home() {
     );
 
     const resData = await response.json();
-    alert(JSON.stringify(resData))
+    // alert(JSON.stringify(resData))
     setResponseData(resData);
   };
 
