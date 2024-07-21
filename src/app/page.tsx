@@ -30,7 +30,7 @@ export default function Home() {
     alert('running')
     // const response = await fetch(`http://localhost:3000/api/searchProduct`, {
     const response = await fetch(
-      `https://mr-energy-two.vercel.app/api/searchProduct`,
+      `https://mrenergy.me/api/searchProduct`,
       {
         method: "POST",
         headers: {
