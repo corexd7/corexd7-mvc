@@ -1,13 +1,19 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { verifyProductCode } from "@/services/productVerification";
 import { validateProductCode } from "@/utils/validation";
 import { AUTHENTICATION_MESSAGES } from "@/constants/authentication";
 import type { VerificationStatus } from "@/types";
+
+const Player = dynamic(
+  () =>
+    import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false }
+);
 
 const statusMessages: Record<
   Exclude<VerificationStatus, "idle" | "loading">,
