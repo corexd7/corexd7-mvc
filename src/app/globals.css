@@ -2,23 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  body {
+    @apply bg-white text-text-dark antialiased;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #000;
+@layer components {
+  .nav-link {
+    @apply text-xs font-semibold uppercase tracking-wider text-text-dark transition-colors duration-200 hover:text-primary;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+
+  .form-label {
+    @apply mb-2 block text-xs font-bold uppercase tracking-wider text-primary;
+  }
+
+  .input-field {
+    @apply w-full rounded-full border border-gray-200 bg-white px-6 py-4 text-sm text-text-dark shadow-input placeholder:text-text-light transition-all duration-200 focus:border-primary focus:shadow-soft focus:outline-none;
+  }
+
+  .btn-primary {
+    @apply w-full rounded-full bg-gradient-primary px-6 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-soft transition-all duration-200 hover:shadow-soft-lg hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary px-5 py-2 text-xs font-semibold uppercase tracking-wider text-primary transition-all duration-200 hover:bg-primary hover:text-white;
+  }
 }
 
 @layer utilities {
