@@ -8,10 +8,5 @@ export async function redeemReward(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-
-  if (!response.ok) {
-    throw new Error("Server error occurred");
-  }
-
   return response.json();
 }

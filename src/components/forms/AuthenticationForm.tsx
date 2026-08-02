@@ -25,7 +25,7 @@ const statusMessages: Record<
     animation: "/animations/success-1.json",
   },
   already_authenticated: {
-    text: AUTHENTICATION_MESSAGES.MAX_REACHED,
+    text: "This product has already been verified",
     color: "text-yellow-600",
     animation: "/animations/warning.json",
   },
@@ -50,7 +50,6 @@ export default function AuthenticationForm() {
   const [productCode, setProductCode] = useState("");
   const [status, setStatus] = useState<VerificationStatus>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [successDetail, setSuccessDetail] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -63,18 +62,12 @@ export default function AuthenticationForm() {
 
     setErrors({});
     setStatus("loading");
-    setSuccessDetail("");
 
     try {
       const response = await verifyProductCode(productCode.trim());
 
-      if (response.success && response.data) {
+      if (response.success) {
         setStatus("success");
-        setSuccessDetail(
-          `${response.data.remainingAttempts} verification attempt${
-            response.data.remainingAttempts === 1 ? "" : "s"
-          } remaining`
-        );
         return;
       }
 
@@ -99,7 +92,6 @@ export default function AuthenticationForm() {
   const handleReset = () => {
     setStatus("idle");
     setErrors({});
-    setSuccessDetail("");
   };
 
   if (status !== "idle" && status !== "loading") {
@@ -116,11 +108,6 @@ export default function AuthenticationForm() {
         <p className={`mt-2 text-center text-lg font-semibold ${result.color}`}>
           {result.text}
         </p>
-        {successDetail && (
-          <p className="mt-1 text-center text-sm text-text-muted">
-            {successDetail}
-          </p>
-        )}
         <Button
           variant="outline"
           onClick={handleReset}

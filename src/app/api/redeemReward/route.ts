@@ -23,43 +23,35 @@ export async function POST(req: NextRequest) {
     }
 
     const client = await clientPromise;
+    const collection = client.db("mrenergyProduct").collection("product-key");
 
-    const existingKey = await client
-      .db("mrenergyProduct")
-      .collection("product-key")
-      .findOne({ productCode: productCode.toLowerCase() });
+    const product = await collection.findOne({
+      productCode: productCode.toLowerCase(),
+    });
 
-    if (!existingKey) {
+    if (!product) {
       return NextResponse.json(
-        { message: "Invalid product code", status: false },
+        { message: "Invalid code", status: false },
         { status: 404 }
       );
     }
 
-    const existingRedemption = await client
-      .db("mrenergyProduct")
-      .collection("reward-redemptions")
-      .findOne({ productCode, mobileNo });
-
-    if (existingRedemption) {
+    if (product.isClaimed === true) {
       return NextResponse.json(
-        { message: "Reward already redeemed for this product", status: false },
+        { message: "Reward already claimed", status: false },
         { status: 409 }
       );
     }
 
-    await client
-      .db("mrenergyProduct")
-      .collection("reward-redemptions")
-      .insertOne({
-        productCode,
-        mobileNo,
-        redeemedAt: new Date(),
-      });
+    await collection.updateOne(
+      { productCode: productCode.toLowerCase() },
+      { $set: { isClaimed: true } }
+    );
 
     return NextResponse.json({
-      message: "Reward redeemed successfully! We will contact you shortly.",
+      message: "Reward claimed successfully!",
       status: true,
+      rewardName: product.rewardName ?? null,
     });
   } catch {
     return NextResponse.json(

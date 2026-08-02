@@ -80,6 +80,7 @@ export interface RedeemRewardRequest {
 export interface RedeemRewardResponse {
   message: string;
   status: boolean;
+  rewardName?: string | null;
   otpRequired?: boolean;
 }
 
